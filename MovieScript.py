@@ -138,9 +138,12 @@ class Driver:
 
                 script.print_report_by_season(self.quarter, self.graphics)
 
-            else:
+            elif mode is "I":
                 script = InternationalScript()
                 script.run()
+
+            else:
+                return
 
             if input("Continue? (Y/N) ") is "N":
                 self.loop_on = False
@@ -432,11 +435,13 @@ class Graphics:
 
 
 # Quick way to run the program without a GUI.
-while True:
+running = True
+
+while running:
     try:
         print("Welcome to the program.")
         driver = Driver()
     except ValueError:
-        print("")
+        running = False
     except KeyboardInterrupt:
-        print("")
+        running = False

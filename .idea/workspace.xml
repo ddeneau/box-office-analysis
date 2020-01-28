@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="28c4dad7-df2a-4379-853e-86441a634901" name="Default Changelist" comment="" />
+    <list default="true" id="28c4dad7-df2a-4379-853e-86441a634901" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../Practice/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Practice/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Practice/MovieScript.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Practice/MovieScript.py" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,6 +24,11 @@
         <option value="Daniel Deneau" />
       </list>
     </option>
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$/../Practice" value="boxoffice" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../Practice" />
   </component>
   <component name="ProjectId" id="1SGtmYcKVTCIvrK9H9h3l1d9rXZ" />
@@ -28,7 +36,7 @@
   <component name="PropertiesComponent">
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../Practice" />
     <property name="run.code.analysis.last.selected.profile" value="aDefault" />
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+    <property name="settings.editor.selected.configurable" value="settings.github" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -50,7 +58,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.MovieScript">
+  <component name="RunManager" selected="Python.MovieScript (1)">
     <configuration name="Game" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="Practice" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -64,6 +72,27 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Game.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="MovieScript (1)" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="Practice" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/../Practice" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/../Practice/MovieScript.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -202,9 +231,10 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.MovieScript (1)" />
         <item itemvalue="Python.MovieScript" />
-        <item itemvalue="Python.MyFirstScript" />
         <item itemvalue="Python.script" />
+        <item itemvalue="Python.MyFirstScript" />
         <item itemvalue="Python.Game" />
       </list>
     </recent_temporary>
@@ -227,8 +257,26 @@
       <option name="project" value="LOCAL" />
       <updated>1580206760843</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Completed first version of a box office data scraping script.">
+      <created>1580207194208</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1580207194208</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="true" />
@@ -244,7 +292,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/../Practice/MovieScript.py</url>
-          <line>417</line>
+          <line>420</line>
           <option name="timeStamp" value="39" />
         </line-breakpoint>
       </breakpoints>
