@@ -2,6 +2,7 @@ import time
 
 import matplotlib.pyplot as plt
 
+# Graphics the sequence defined below. 
 table = [0]
 table2 = [0]
 table3 = [0]
