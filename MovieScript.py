@@ -170,8 +170,8 @@ class MovieScript:
         self.movies = list()  # List of titles of top box-office grosses
         self.grosses = list()  # List of top box-office grosses (as text)
         self.report = dict()  # Mapping of titles to their amounts.
-        self.movie_site_url = ""  # URL
-        self.gross_site_url = ""
+        self.movie_site_url = ""  # Section of page with movie titles.
+        self.gross_site_url = ""  # Section of page with gross information. 
 
     # Takes raw data from Box Office Mojo and turns it into a list compatible with the script.
     # Specifically a list of movie titles.
