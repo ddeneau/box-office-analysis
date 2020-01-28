@@ -69,7 +69,7 @@ def run(running, new):
         return
 
     if new is True:
-        size = int(input("How Long Would You Like Your Array To Be"))
+        size = int(input("How Long Would You Like Your Array To Be?"))
 
         for i in range(size):
             n = i + 1
