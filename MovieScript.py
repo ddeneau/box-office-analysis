@@ -1,4 +1,4 @@
-# Fun practice with some basic python and programming concepts to find and
+# MFun practice with some basic python and programming concepts to find and
 # display data about film box-office performance.
 #
 # Author: ddeneau
@@ -18,16 +18,15 @@ import time
 import bs4
 import matplotlib.pyplot as plt
 import numpy as np
+import pygame
 import requests
-
-#  import pygame (Not used right now)
 
 # Some constants for swapping quarters in and out.
 # Domestic early top grossing films per quarter or season, for 44 years.
-JANUARY_MARCH = "https://www.boxofficemojo.com/quarter/q1/?grossesOption=calendarGrosses"
-APRIL_JUNE = "https://www.boxofficemojo.com/quarter/q2/?grossesOption=calendarGrosses"
-JULY_SEPTEMBER = "https://www.boxofficemojo.com/quarter/q3/?grossesOption=calendarGrosses"
-OCTOBER_DECEMBER = "https://www.boxofficemojo.com/quarter/q4/?grossesOption=calendarGrosses"
+FIRST_QUARTER = "https://www.boxofficemojo.com/quarter/q1/?grossesOption=calendarGrosses"
+SECOND_QUARTER = "https://www.boxofficemojo.com/quarter/q2/?grossesOption=calendarGrosses"
+THIRD_QUARTER = "https://www.boxofficemojo.com/quarter/q3/?grossesOption=calendarGrosses"
+FOURTH_QUARTER = "https://www.boxofficemojo.com/quarter/q4/?grossesOption=calendarGrosses"
 SUMMER = "https://www.boxofficemojo.com/season/summer/?grossesOption=totalGrosses"
 SPRING = "https://www.boxofficemojo.com/season/spring/?grossesOption=totalGrosses"
 WINTER = "https://www.boxofficemojo.com/season/winter/?grossesOption=totalGrosses"
@@ -43,10 +42,10 @@ INTERNATIONAL = "https://www.boxofficemojo.com/intl/?ref_=bo_nb_ql_tab"
 # Switch case function for choosing quarters.
 def switch_quarter(quarter):
     switcher = {
-        1: JANUARY_MARCH,
-        2: APRIL_JUNE,
-        3: JULY_SEPTEMBER,
-        4: OCTOBER_DECEMBER,
+        1: FIRST_QUARTER,
+        2: SECOND_QUARTER,
+        3: THIRD_QUARTER,
+        4: FOURTH_QUARTER,
         5: WINTER,
         6: SPRING,
         7: SUMMER,
@@ -90,19 +89,37 @@ def switch_color(color):
 # Class for handling input. Initiates main script.
 class Driver:
 
-    def __init__(self):
+    def __init__(self, width, height):
         self.quarter = 0  # Fiscal quarter as a number, handled by switcher above.
         self.loop_on = True  # boolean for main loop.
         self.graphics = Graphics()  # For making graphs.
         self.months = list("")
         self.separate_month_links(self.months)
         self.main()  # Runs main prompt loop.
+        pygame.init()
+        self.window = pygame.display.set_mode((width, height))
+        pygame.display.set_caption('Box Office Data Tool')
+        self.main_gui(False)
+
+    # Uses a GUI for control and display.
+    def main_gui(self, on):
+        while on:
+            self.window.fill((220, 115, 200))
+            self.add_directions()
+
+        for event in pygame.event.get():
+            if event is pygame.QUIT:
+                pygame.quit()
+                quit()
+
+            pygame.display.update()
 
     # Prompts user for a selection of periods to display data from. Then prompts user to
     # continue or return and quit the loop.
     def main(self):
         while self.loop_on:
             mode = input(" Press 'M' for reports by month \n Press 'Q' for reports by quarter.")
+            month_choice = ""
 
             if mode is "M":
                 try:
@@ -111,7 +128,7 @@ class Driver:
                 except ValueError:
                     print("")
 
-                script = MovieScript(JULY_SEPTEMBER)
+                script = MovieScript(THIRD_QUARTER)
 
                 try:
                     script.find_data_by_month(self.months, month_choice, self.graphics)
@@ -150,6 +167,10 @@ class Driver:
                 return
             else:
                 continue
+
+    def add_directions(self):
+        blue = (0, 0, 100)
+        green = (0, 100, 0)
 
     @staticmethod
     def separate_month_links(months):
@@ -227,10 +248,11 @@ class MovieScript:
         self.add_grosses(3, 4)
         self.add_movies()
         self.map_information()
-        season = ""
+        start = "."
+        stop = "."
+        season = "."
 
         # Heading information sorting.
-
         if quarter is WINTER or SPRING or SUMMER or FALL:
             if quarter is WINTER:
                 season = "Winter"
@@ -240,19 +262,15 @@ class MovieScript:
                 season = "Summer"
             elif quarter is FALL:
                 season = "Fall"
-
-            print(season)
-
-        else:
-            if quarter is JANUARY_MARCH:
+            elif quarter is FIRST_QUARTER:
                 start = "January"
                 stop = "March"
                 season = "Q1"
-            elif quarter is APRIL_JUNE:
+            elif quarter is SECOND_QUARTER:
                 start = "April"
                 stop = "June"
                 season = "Q2"
-            elif quarter is JULY_SEPTEMBER:
+            elif quarter is THIRD_QUARTER:
                 start = "July"
                 stop = "September"
                 season = "Q3"
@@ -261,9 +279,9 @@ class MovieScript:
                 stop = "December"
                 season = "Q4"
 
-            print("From " + start + " to " + stop)
-
-        print("Title ------- Gross")
+        print("From " + start + " to " + stop)
+        print("Title ------- Gross: ")
+        print(season)
 
         # Outputs data to console.
         for item in list(self.report):
@@ -420,27 +438,37 @@ class Graphics:
 
         x = np.arange(0, len(data.items()))
         y = np.asarray(Graphics.get_gross_numbers(data))
-        ax.set_xlabel('Years in past')
+        ax.set_xlabel('Year of Release')
         ax.set_ylabel('Gross (Millions of Dollars) ')
+
+        years = list()
+        year_labels = list()
+        number = 2020
+
         ax.set_title(title)
 
         for i in range(x.size):
+            years.append(i)
+            year_labels.append(str(number))
+            number -= 1
             color = switch_color(random.randrange(1, 7))
             point_label = list(data).pop(i)
             point_label = str.strip(point_label, " ")
             plt.scatter(x[i], y[i], s=30, c=color, alpha=0.3)
             plt.text(x[i], y[i] + 2, point_label, fontsize=4)
+            plt.xticks(years, year_labels, fontsize=4, rotation=30)
 
         plt.show()
 
 
 # Quick way to run the program without a GUI.
+
 running = True
 
 while running:
     try:
         print("Welcome to the program.")
-        driver = Driver()
+        driver = Driver(800, 415)
     except ValueError:
         running = False
     except KeyboardInterrupt:
