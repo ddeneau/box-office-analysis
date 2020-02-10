@@ -18,11 +18,11 @@ import time
 import bs4
 import matplotlib.pyplot as plt
 import numpy as np
-import pygame
 import requests
 
 # Some constants for swapping quarters in and out.
 # Domestic early top grossing films per quarter or season, for 44 years.
+
 FIRST_QUARTER = "https://www.boxofficemojo.com/quarter/q1/?grossesOption=calendarGrosses"
 SECOND_QUARTER = "https://www.boxofficemojo.com/quarter/q2/?grossesOption=calendarGrosses"
 THIRD_QUARTER = "https://www.boxofficemojo.com/quarter/q3/?grossesOption=calendarGrosses"
@@ -34,6 +34,7 @@ FALL = "https://www.boxofficemojo.com/season/fall/?grossesOption=totalGrosses"
 MONTHLY = "https://www.boxofficemojo.com/month/february/?grossesOption=calendarGrosses"
 MONTHS = ("january", "february", "march", "april", "may", "june", "july", "august", "september", "october", "november",
           "december")
+SEASONS = (FIRST_QUARTER, SECOND_QUARTER, THIRD_QUARTER, FOURTH_QUARTER, WINTER, SPRING, SUMMER, FALL)
 
 # Top foreign films by country, weekly.
 INTERNATIONAL = "https://www.boxofficemojo.com/intl/?ref_=bo_nb_ql_tab"
@@ -89,30 +90,12 @@ def switch_color(color):
 # Class for handling input. Initiates main script.
 class Driver:
 
-    def __init__(self, width, height):
+    def __init__(self):
         self.quarter = 0  # Fiscal quarter as a number, handled by switcher above.
         self.loop_on = True  # boolean for main loop.
         self.graphics = Graphics()  # For making graphs.
         self.months = list("")
         self.separate_month_links(self.months)
-        self.main()  # Runs main prompt loop.
-        pygame.init()
-        self.window = pygame.display.set_mode((width, height))
-        pygame.display.set_caption('Box Office Data Tool')
-        self.main_gui(False)
-
-    # Uses a GUI for control and display.
-    def main_gui(self, on):
-        while on:
-            self.window.fill((220, 115, 200))
-            self.add_directions()
-
-        for event in pygame.event.get():
-            if event is pygame.QUIT:
-                pygame.quit()
-                quit()
-
-            pygame.display.update()
 
     # Prompts user for a selection of periods to display data from. Then prompts user to
     # continue or return and quit the loop.
@@ -160,17 +143,13 @@ class Driver:
                 script.run()
 
             else:
-                return
+                return False
 
             if input("Continue? (Y/N) ") is "N":
                 self.loop_on = False
                 return
             else:
                 continue
-
-    def add_directions(self):
-        blue = (0, 0, 100)
-        green = (0, 100, 0)
 
     @staticmethod
     def separate_month_links(months):
@@ -459,17 +438,3 @@ class Graphics:
             plt.xticks(years, year_labels, fontsize=4, rotation=30)
 
         plt.show()
-
-
-# Quick way to run the program without a GUI.
-
-running = True
-
-while running:
-    try:
-        print("Welcome to the program.")
-        driver = Driver(800, 415)
-    except ValueError:
-        running = False
-    except KeyboardInterrupt:
-        running = False
