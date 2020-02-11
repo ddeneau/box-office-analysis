@@ -114,7 +114,7 @@ class Driver:
                 script = MovieScript(THIRD_QUARTER)
 
                 try:
-                    script.find_data_by_month(self.months, month_choice, self.graphics)
+                    script.find_data_by_month(month_choice)
                 except ConnectionError:
                     print("Not connected to Internet. ")
 
@@ -136,7 +136,7 @@ class Driver:
                 except ConnectionError:
                     print("Not connected to Internet. ")
 
-                script.print_report_by_season(self.quarter, self.graphics)
+                script.print_report_by_season(self.quarter)
 
             elif mode is "I":
                 script = InternationalScript()
@@ -161,6 +161,8 @@ class Driver:
             months.insert(index, url_front + month + url_back)
             index += 1
 
+        return months
+
 
 # Gets data from www.BoxOfficeMojo.com.
 # Generates simple report of what movies performed best at the box office, by season.
@@ -174,7 +176,8 @@ class MovieScript:
         self.grosses = list()  # List of top box-office grosses (as text)
         self.report = dict()  # Mapping of titles to their amounts.
         self.movie_site_url = ""  # Section of page with movie titles.
-        self.gross_site_url = ""  # Section of page with gross information. 
+        self.gross_site_url = ""  # Section of page with gross information.
+        self.graphics = Graphics()
 
     # Takes raw data from Box Office Mojo and turns it into a list compatible with the script.
     # Specifically a list of movie titles.
@@ -222,7 +225,7 @@ class MovieScript:
                 self.report[movie] = self.grosses.pop(0)
 
     # Compiles a report
-    def print_report_by_season(self, quarter, graphics):
+    def print_report_by_season(self, quarter):
         # Data collection and sorting.
         self.add_grosses(3, 4)
         self.add_movies()
@@ -267,25 +270,24 @@ class MovieScript:
             print(" " + item + " ------- " + self.report.get(item))
 
         if input("Graph?: (Y/N") is "Y":
-            graphics.graph_data(self.report, season, False)
+            self.graphics.graph_data(self.report, season, False)
         else:
             return
 
     # Finds and compiles information for films by month
-    def find_data_by_month(self, months, month, graphics):
-        by_month = False
+    def find_data_by_month(self, month):
         month_number = 1
 
-        for link in months:
+        for link in Driver.separate_month_links(list()):
             self.populate_lists_from_url(link)
             self.add_movies()
             self.add_grosses(3, 4)
             self.map_information()
 
             if month is 0:
-                self.print_report_by_month(month_number, self.report, graphics)
+                self.print_report_by_month(month_number)
             elif month is month_number:
-                self.print_report_by_month(month, self.report, graphics)
+                self.print_report_by_month(month)
                 return
 
             self.grosses.clear()
@@ -294,15 +296,18 @@ class MovieScript:
             month_number += 1
 
     # Compiles and outputs to console information about a certain month.
-    def print_report_by_month(self, month, report, graphics):
+    def print_report_by_month(self, month):
         self.map_information()
 
         print("Month: " + switch_month(month))
 
-        for item in list(report):
+        for item in list(self.report):
             print(" " + item + " ------- " + self.report.get(item))
 
-        graphics.graph_data(report, switch_month(month), True)
+        if input("Graph?: (Y/N") is "Y":
+            self.graphics.graph_data(self.report, switch_month(month), True)
+        else:
+            return
 
     # Takes raw data from Box Office Mojo and turns it into a list compatible with the script.
     def populate_lists_from_url(self, link):
@@ -438,3 +443,7 @@ class Graphics:
             plt.xticks(years, year_labels, fontsize=4, rotation=30)
 
         plt.show()
+
+
+if __name__ == '__main__':
+    Driver().main()
