@@ -5,7 +5,7 @@ from kivy.uix.button import Button
 from kivy.uix.gridlayout import GridLayout
 from kivy.uix.scrollview import ScrollView
 
-from MovieScript import MONTHS, switch_quarter, MovieScript
+from MovieScript import MONTHS, switch_quarter, switch_month, MovieScript
 
 
 class StartingPage(GridLayout):
@@ -78,6 +78,7 @@ class StartingPage(GridLayout):
     def start_script(self, time_type, selector):
         data_out = ScrollableLabel()
         back_button = Button(text='Return')
+        graph_button = Button(text='Graph')
         back_button.bind(on_press=lambda x: self.go_back())
 
         self.clear_widgets()
@@ -89,20 +90,31 @@ class StartingPage(GridLayout):
             script.find_data_by_season(season, True)
             data_out.text = StartingPage.parse_report(script.report)
             data_out.size_hint_min = (1000, 900)
+            graph_button.bind(on_press=lambda x: self.graph(script, switch_quarter(selector), False))
         else:
             script = MovieScript(switch_quarter(1))
-            script.find_data_by_month(selector, True)
+            script.find_data_from_month(selector)
             data_out.text = StartingPage.parse_report(script.report)
             data_out.size_hint_min = (900, 900)
+            graph_button.bind(on_press=lambda x: self.graph(script, switch_month(selector), True))
 
         data_out.do_scroll_x = False
         data_out.center_x
+        graph_button.bind(on_press=lambda x: self.graph(script, selector, False))
         self.add_widget(data_out)
         self.add_widget(back_button)
+        self.add_widget(graph_button)
 
     def go_back(self):
         self.clear_widgets()
         self.__init__()
+
+    @staticmethod
+    def graph(script, number, flag):
+        if flag:
+            script.graphics.graph_data(script.report, switch_month(number), flag)
+        else:
+            script.graphics.graph_data(script.report, switch_quarter(number), flag)
 
     @staticmethod
     def parse_report(report):

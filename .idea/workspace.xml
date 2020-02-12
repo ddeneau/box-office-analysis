@@ -234,7 +234,14 @@
       <option name="project" value="LOCAL" />
       <updated>1581388024406</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Fixed seasonal and quarterly report functionality on GUI.">
+      <created>1581484937307</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1581484937307</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -259,13 +266,21 @@
     <MESSAGE value="Corrected quarterly time frame and seasonal labels on text output and graphs.&#10;Assigned variable month_choice an empty string before assigning it user input." />
     <MESSAGE value="New GUI classes and separate file." />
     <MESSAGE value="Scraped together very rough functionality for the GUI." />
-    <option name="LAST_COMMIT_MESSAGE" value="Scraped together very rough functionality for the GUI." />
+    <MESSAGE value="Fixed seasonal and quarterly report functionality on GUI." />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed seasonal and quarterly report functionality on GUI." />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/MovieScript.py</url>
+          <line>300</line>
+          <option name="timeStamp" value="77" />
+        </line-breakpoint>
+      </breakpoints>
       <default-breakpoints>
         <breakpoint type="python-exception">
           <properties notifyOnTerminate="true" exception="BaseException">

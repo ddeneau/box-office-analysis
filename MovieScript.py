@@ -111,9 +111,8 @@ class Driver:
                 except ValueError:
                     print("")
 
-                script = MovieScript(THIRD_QUARTER)
-
                 try:
+                    script = MovieScript(THIRD_QUARTER)
                     script.find_data_by_month(month_choice)
                 except ConnectionError:
                     print("Not connected to Internet. ")
@@ -129,9 +128,8 @@ class Driver:
                 except ValueError:
                     print("")
 
-                script = MovieScript(self.quarter)  # Passes in user selection as a period of time.
-
                 try:
+                    script = MovieScript(self.quarter)  # Passes in user selection as a period of time.
                     script.populate_lists_from_url(self.quarter)
                 except ConnectionError:
                     print("Not connected to Internet. ")
@@ -280,7 +278,7 @@ class MovieScript:
         else:
             return
 
-    # Finds and compiles information for films by month
+    # Finds and compiles information for films by month, and the other months.
     def find_data_by_month(self, month, gui):
         month_number = 1
 
@@ -294,12 +292,16 @@ class MovieScript:
                 self.print_report_by_month(month_number)
             elif month is month_number and not gui:
                 self.print_report_by_month(month)
-                return
 
-            self.grosses.clear()
-            self.movies.clear()
-            self.report.clear()
+            self.clear_raw_data()
             month_number += 1
+
+    # Just finds data from one month.
+    def find_data_from_month(self, month):
+        self.populate_lists_from_url(Driver.separate_month_links(list()).__getitem__(month - 1))
+        self.add_movies()
+        self.add_grosses(3, 4)
+        self.map_information()
 
     # Compiles and outputs to console information about a certain month.
     def print_report_by_month(self, month):
@@ -325,6 +327,11 @@ class MovieScript:
         self.gross_collection = bs4.BeautifulSoup(site.text, features='lxml')
         self.gross_collection = self.gross_site_url.find_all(
             class_=re.compile("a-text-right mojo-field-type-money"))
+
+    def clear_raw_data(self):
+        self.grosses.clear()
+        self.movies.clear()
+        self.report.clear()
 
 
 # Uses Box Office Mojo data to display report of international film data.
