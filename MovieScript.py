@@ -178,6 +178,7 @@ class MovieScript:
         self.movie_site_url = ""  # Section of page with movie titles.
         self.gross_site_url = ""  # Section of page with gross information.
         self.graphics = Graphics()
+        self.text = ""
 
     # Takes raw data from Box Office Mojo and turns it into a list compatible with the script.
     # Specifically a list of movie titles.
@@ -224,12 +225,16 @@ class MovieScript:
             if len(self.grosses) > 0:
                 self.report[movie] = self.grosses.pop(0)
 
-    # Compiles a report
-    def print_report_by_season(self, quarter):
-        # Data collection and sorting.
+    # Data collection and sorting seasonally.
+    def find_data_by_season(self, quarter, gui):
         self.add_grosses(3, 4)
         self.add_movies()
         self.map_information()
+        if not gui:
+            self.print_report_by_season(quarter)
+
+    # Compiles a report
+    def print_report_by_season(self, quarter):
         start = "."
         stop = "."
         season = "."
@@ -268,6 +273,7 @@ class MovieScript:
         # Outputs data to console.
         for item in list(self.report):
             print(" " + item + " ------- " + self.report.get(item))
+            self.text += " " + item + " ------- " + self.report.get(item) + "\n"
 
         if input("Graph?: (Y/N") is "Y":
             self.graphics.graph_data(self.report, season, False)
@@ -275,7 +281,7 @@ class MovieScript:
             return
 
     # Finds and compiles information for films by month
-    def find_data_by_month(self, month):
+    def find_data_by_month(self, month, gui):
         month_number = 1
 
         for link in Driver.separate_month_links(list()):
@@ -284,9 +290,9 @@ class MovieScript:
             self.add_grosses(3, 4)
             self.map_information()
 
-            if month is 0:
+            if month is 0 and not gui:
                 self.print_report_by_month(month_number)
-            elif month is month_number:
+            elif month is month_number and not gui:
                 self.print_report_by_month(month)
                 return
 
@@ -297,12 +303,11 @@ class MovieScript:
 
     # Compiles and outputs to console information about a certain month.
     def print_report_by_month(self, month):
-        self.map_information()
-
         print("Month: " + switch_month(month))
 
         for item in list(self.report):
             print(" " + item + " ------- " + self.report.get(item))
+            self.text += " " + item + " ------- " + self.report.get(item) + "\n"
 
         if input("Graph?: (Y/N") is "Y":
             self.graphics.graph_data(self.report, switch_month(month), True)
