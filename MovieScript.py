@@ -1,4 +1,4 @@
-# MFun practice with some basic python and programming concepts to find and
+# Fun practice with some basic python and programming concepts to find and
 # display data about film box-office performance.
 #
 # Author: ddeneau
@@ -94,8 +94,8 @@ class Driver:
         self.quarter = 0  # Fiscal quarter as a number, handled by switcher above.
         self.loop_on = True  # boolean for main loop.
         self.graphics = Graphics()  # For making graphs.
-        self.months = list("")
-        self.separate_month_links(self.months)
+        self.months = list("")  # List of months.
+        self.separate_month_links(self.months)  # Call to function to write links for web scraping.
 
     # Prompts user for a selection of periods to display data from. Then prompts user to
     # continue or return and quit the loop.
@@ -109,11 +109,12 @@ class Driver:
                     month_choice = (int(input("  Enter a number (1-12) representing a month. \n  Enter 0 to generate "
                                               "reports for each month: ")))
                 except ValueError:
-                    print("")
+                    print("Invalid input. ")
 
                 try:
-                    script = MovieScript(THIRD_QUARTER)
-                    script.find_data_by_month(month_choice)
+                    script = MovieScript(THIRD_QUARTER, False)
+                    script.find_data_from_month(month_choice)
+
                 except ConnectionError:
                     print("Not connected to Internet. ")
 
@@ -126,19 +127,14 @@ class Driver:
                                                             "    7 - Summer \n"
                                                             "    8 - Fall: ")))
                 except ValueError:
-                    print("")
+                    print("Invalid input. ")
 
                 try:
-                    script = MovieScript(self.quarter)  # Passes in user selection as a period of time.
-                    script.populate_lists_from_url(self.quarter)
+                    script = MovieScript(self.quarter, False)  # Passes in user selection as a period of time.
+                    script.find_data_by_season(self.quarter, False)
+
                 except ConnectionError:
                     print("Not connected to Internet. ")
-
-                script.print_report_by_season(self.quarter)
-
-            elif mode is "I":
-                script = InternationalScript()
-                script.run()
 
             else:
                 return False
@@ -166,7 +162,7 @@ class Driver:
 # Generates simple report of what movies performed best at the box office, by season.
 class MovieScript:
 
-    def __init__(self, site):
+    def __init__(self, site, no_graphing):
         self.site = ""  # Eventually turns URL string into a representation that bs4 can use.
         self.movie_collection = None  # Stores HTML code related to movie titles.
         self.gross_collection = None  # Stores HTMl code related to gross data.
@@ -177,6 +173,8 @@ class MovieScript:
         self.gross_site_url = ""  # Section of page with gross information.
         self.graphics = Graphics()
         self.text = ""
+        self.scores = dict()
+        self.no_graphing = no_graphing
 
     # Takes raw data from Box Office Mojo and turns it into a list compatible with the script.
     # Specifically a list of movie titles.
@@ -225,11 +223,11 @@ class MovieScript:
 
     # Data collection and sorting seasonally.
     def find_data_by_season(self, quarter, gui):
+        self.populate_lists_from_url(quarter)
         self.add_grosses(3, 4)
         self.add_movies()
         self.map_information()
-        if not gui:
-            self.print_report_by_season(quarter)
+        self.print_report_by_season(quarter)
 
     # Compiles a report
     def print_report_by_season(self, quarter):
@@ -273,28 +271,11 @@ class MovieScript:
             print(" " + item + " ------- " + self.report.get(item))
             self.text += " " + item + " ------- " + self.report.get(item) + "\n"
 
-        if input("Graph?: (Y/N") is "Y":
-            self.graphics.graph_data(self.report, season, False)
+        if not self.no_graphing:
+            if input("Graph?: (Y/N") is "Y":
+                self.graphics.graph_data(self.report, season, False)
         else:
             return
-
-    # Finds and compiles information for films by month, and the other months.
-    def find_data_by_month(self, month, gui):
-        month_number = 1
-
-        for link in Driver.separate_month_links(list()):
-            self.populate_lists_from_url(link)
-            self.add_movies()
-            self.add_grosses(3, 4)
-            self.map_information()
-
-            if month is 0 and not gui:
-                self.print_report_by_month(month_number)
-            elif month is month_number and not gui:
-                self.print_report_by_month(month)
-
-            self.clear_raw_data()
-            month_number += 1
 
     # Just finds data from one month.
     def find_data_from_month(self, month):
@@ -302,17 +283,22 @@ class MovieScript:
         self.add_movies()
         self.add_grosses(3, 4)
         self.map_information()
+        self.print_report_by_month(month)
 
     # Compiles and outputs to console information about a certain month.
     def print_report_by_month(self, month):
         print("Month: " + switch_month(month))
 
         for item in list(self.report):
-            print(" " + item + " ------- " + self.report.get(item))
+
+            if not self.no_graphing:
+                print(" " + item + " ------- " + self.report.get(item))
+
             self.text += " " + item + " ------- " + self.report.get(item) + "\n"
 
-        if input("Graph?: (Y/N") is "Y":
-            self.graphics.graph_data(self.report, switch_month(month), True)
+        if not self.no_graphing:
+            if input("Graph?: (Y/N") is "Y":
+                self.graphics.graph_data(self.report, switch_month(month), True)
         else:
             return
 
@@ -332,66 +318,6 @@ class MovieScript:
         self.grosses.clear()
         self.movies.clear()
         self.report.clear()
-
-
-# Uses Box Office Mojo data to display report of international film data.
-# todo: fix this class's output and data structuring.
-class InternationalScript:
-
-    def __init__(self):
-        self.site = requests.get(INTERNATIONAL)  # turns URL string into a representation that bs4 can use.
-        self.countries_collection = None  # Stores HTML text regarding country
-        self.titles_collection = None  # Stores HTML text regarding title
-        self.date_collection = None  # Stores HTML text regarding date
-        self.titles = list()  # Stores strings of film titles.
-        self.countries = list()  # Stores strings of countries
-        self.dates = list()  # Stores strings of month and period of days
-        self.films_to_dates = dict()  # Mapping of films to their dates of record performance.
-        self.films_to_countries = dict()  # Mapping of films to countries
-
-    # Populates information from sections on the worldwide performance.
-    def find_data(self):
-        self.site = bs4.BeautifulSoup(self.site.text, features='lxml')
-        self.countries_collection = self.site.find_all(
-            class_=re.compile("a-text-left mojo-header-column mojo-truncate mojo-field-type-area_id"))
-
-        self.site = bs4.BeautifulSoup(self.site.text, features='lxml')
-        self.titles_collection = self.site.find_all(class_=re.compile
-        ("a-text-left mojo-field-type-release mojo-cell-wide"))
-
-        self.site = bs4.BeautifulSoup(self.site.text, features='lxml')
-        self.date_collection = self.site.find_all(class_=re.compile("a-text-left mojo-field-type-date_interval"))
-
-    # Makes information more data structure friendly
-    def list_data(self):
-        for item in self.countries_collection:
-            self.countries.append(item.text)
-
-        for item in self.titles_collection:
-            self.titles.append(item.text)
-
-        for item in self.date_collection:
-            self.dates.append(item.text)
-
-        for title in self.titles:
-            if len(self.dates) > 0:
-                self.films_to_date[title] = self.dates.pop(0)
-
-        for date in self.dates:
-            if len(self.dates) > 0:
-                self.films_to_countries[date] = self.countries.pop(0)
-
-    # calls main operations
-    def run(self):
-        self.find_data()
-        self.list_data()
-        self.print()
-
-    # Outputs results to console.
-    def print(self):
-        print(self.titles)
-        print(self.dates)
-        print(self.countries)
 
 
 # Handles visualization of data.

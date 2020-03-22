@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="28c4dad7-df2a-4379-853e-86441a634901" name="Default Changelist" comment="">
+    <list default="true" id="28c4dad7-df2a-4379-853e-86441a634901" name="Default Changelist" comment="Mostly functional GUI, except for some major issues with the graph option.">
+      <change afterPath="$PROJECT_DIR$/Saver.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Scores.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/moviedata.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GUI.py" beforeDir="false" afterPath="$PROJECT_DIR$/GUI.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MovieScript.py" beforeDir="false" afterPath="$PROJECT_DIR$/MovieScript.py" afterDir="false" />
@@ -65,7 +68,28 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.GUI">
+  <component name="RunManager" selected="Python.BoxOfficeTimeline">
+    <configuration name="BoxOfficeTimeline" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="Practice" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/BoxOfficeTimeline.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="GUI" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="Practice" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -79,27 +103,6 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/GUI.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="MovieScript (1)" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="Practice" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/MovieScript.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -129,7 +132,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="OrbitSim" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="Saver" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="Practice" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -141,7 +144,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/OrbitSim.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Saver.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -150,7 +153,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="script" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="Scores" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="Practice" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -162,7 +165,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/StoreNumbers.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Scores.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -173,11 +176,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.BoxOfficeTimeline" />
+        <item itemvalue="Python.Saver" />
         <item itemvalue="Python.GUI" />
         <item itemvalue="Python.MovieScript" />
-        <item itemvalue="Python.OrbitSim" />
-        <item itemvalue="Python.MovieScript (1)" />
-        <item itemvalue="Python.script" />
+        <item itemvalue="Python.Scores" />
       </list>
     </recent_temporary>
   </component>
@@ -241,8 +244,18 @@
       <option name="project" value="LOCAL" />
       <updated>1581484937307</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Mostly functional GUI, except for some major issues with the graph option.">
+      <created>1581486695585</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1581486695585</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
+  </component>
+  <component name="UnknownFeatures">
+    <option featureType="com.intellij.fileTypeFactory" implementationName="*.csv" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -267,7 +280,8 @@
     <MESSAGE value="New GUI classes and separate file." />
     <MESSAGE value="Scraped together very rough functionality for the GUI." />
     <MESSAGE value="Fixed seasonal and quarterly report functionality on GUI." />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed seasonal and quarterly report functionality on GUI." />
+    <MESSAGE value="Mostly functional GUI, except for some major issues with the graph option." />
+    <option name="LAST_COMMIT_MESSAGE" value="Mostly functional GUI, except for some major issues with the graph option." />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
@@ -276,9 +290,24 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/MovieScript.py</url>
-          <line>300</line>
-          <option name="timeStamp" value="77" />
+          <url>file://$PROJECT_DIR$/Scores.py</url>
+          <line>4</line>
+          <option name="timeStamp" value="83" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/Saver.py</url>
+          <line>16</line>
+          <option name="timeStamp" value="91" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/BoxOfficeTimeline.py</url>
+          <line>56</line>
+          <option name="timeStamp" value="106" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/BoxOfficeTimeline.py</url>
+          <line>70</line>
+          <option name="timeStamp" value="107" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>

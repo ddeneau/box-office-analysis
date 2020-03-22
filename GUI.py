@@ -85,14 +85,13 @@ class StartingPage(GridLayout):
 
         if time_type:
             season = switch_quarter(selector)
-            script = MovieScript(season)
-            script.populate_lists_from_url(season)
+            script = MovieScript(season, True)
             script.find_data_by_season(season, True)
             data_out.text = StartingPage.parse_report(script.report)
             data_out.size_hint_min = (1000, 900)
             graph_button.bind(on_press=lambda x: self.graph(script, switch_quarter(selector), False))
         else:
-            script = MovieScript(switch_quarter(1))
+            script = MovieScript(switch_quarter(1), True)
             script.find_data_from_month(selector)
             data_out.text = StartingPage.parse_report(script.report)
             data_out.size_hint_min = (900, 900)
