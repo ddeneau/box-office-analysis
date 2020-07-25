@@ -344,7 +344,6 @@ class Graphics:
                 gross = re.findall(r'\d+', chunk.__str__())
                 digit = int(gross.pop(0)) / 1000000
                 new_list.append(digit)
-                chunk = ""
             except TypeError:
                 continue
 

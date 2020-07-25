@@ -2,12 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="28c4dad7-df2a-4379-853e-86441a634901" name="Default Changelist" comment="Mostly functional GUI, except for some major issues with the graph option.">
-      <change afterPath="$PROJECT_DIR$/Saver.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Scores.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/moviedata.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.name" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/Practice.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/BoxOfficeProject.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GUI.py" beforeDir="false" afterPath="$PROJECT_DIR$/GUI.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MovieScript.py" beforeDir="false" afterPath="$PROJECT_DIR$/MovieScript.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/moviedata.csv" beforeDir="false" afterPath="$PROJECT_DIR$/moviedata.csv" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -70,7 +70,7 @@
   </component>
   <component name="RunManager" selected="Python.BoxOfficeTimeline">
     <configuration name="BoxOfficeTimeline" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="Practice" />
+      <module name="BoxOfficeProject" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -91,7 +91,7 @@
       <method v="2" />
     </configuration>
     <configuration name="GUI" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="Practice" />
+      <module name="BoxOfficeProject" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -112,7 +112,7 @@
       <method v="2" />
     </configuration>
     <configuration name="MovieScript" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="Practice" />
+      <module name="BoxOfficeProject" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -133,7 +133,7 @@
       <method v="2" />
     </configuration>
     <configuration name="Saver" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="Practice" />
+      <module name="BoxOfficeProject" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -154,7 +154,7 @@
       <method v="2" />
     </configuration>
     <configuration name="Scores" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="Practice" />
+      <module name="BoxOfficeProject" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -290,24 +290,9 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/Scores.py</url>
-          <line>4</line>
-          <option name="timeStamp" value="83" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/Saver.py</url>
-          <line>16</line>
-          <option name="timeStamp" value="91" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/BoxOfficeTimeline.py</url>
-          <line>56</line>
-          <option name="timeStamp" value="106" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/BoxOfficeTimeline.py</url>
-          <line>70</line>
-          <option name="timeStamp" value="107" />
+          <line>95</line>
+          <option name="timeStamp" value="116" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>
