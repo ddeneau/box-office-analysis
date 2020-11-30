@@ -1,3 +1,5 @@
+import random
+
 from kivy.app import App
 from kivy.lang import Builder
 from kivy.properties import StringProperty
@@ -6,6 +8,14 @@ from kivy.uix.gridlayout import GridLayout
 from kivy.uix.scrollview import ScrollView
 
 from MovieScript import MONTHS, switch_quarter, switch_month, MovieScript
+
+
+def get_color():
+    r = random.randint(200, 255)
+    g = random.randint(1, 100)
+    b = random.randint(101, 199)
+
+    return r, g, b, 0.1
 
 
 class StartingPage(GridLayout):
@@ -46,7 +56,7 @@ class StartingPage(GridLayout):
         self.remove_widget(self.button_months)
 
         for i in range(1, 9):
-            seasons[i] = Button(text=seasons_names.__getitem__(i - 1))
+            seasons[i] = Button(text=seasons_names.__getitem__(i - 1), background_color=get_color())
             self.add_widget(seasons.get(i))
 
         self.add_season_buttons(seasons)
@@ -75,6 +85,21 @@ class StartingPage(GridLayout):
         seasons.get(7).bind(on_press=lambda x: self.start_script(True, 7))
         seasons.get(8).bind(on_press=lambda x: self.start_script(True, 8))
 
+    def get_data_for_month(self, selector, button, output):
+        season = switch_quarter(selector)
+        script = MovieScript(season, True)
+        script.find_data_by_season(season, True)
+        output.text = StartingPage.parse_report(script.report)
+        output.size_hint_min = (1000, 900)
+        button.bind(on_press=lambda x: self.graph(script, switch_quarter(selector), False))
+
+    def get_data_for_season(self, selector, button, output):
+        script = MovieScript(switch_quarter(1), True)
+        script.find_data_from_month(selector)
+        output.text = StartingPage.parse_report(script.report)
+        output.size_hint_min = (900, 900)
+        button.bind(on_press=lambda x: self.graph(script, switch_month(selector), True))
+
     def start_script(self, time_type, selector):
         data_out = ScrollableLabel()
         back_button = Button(text='Return')
@@ -84,18 +109,9 @@ class StartingPage(GridLayout):
         self.clear_widgets()
 
         if time_type:
-            season = switch_quarter(selector)
-            script = MovieScript(season, True)
-            script.find_data_by_season(season, True)
-            data_out.text = StartingPage.parse_report(script.report)
-            data_out.size_hint_min = (1000, 900)
-            graph_button.bind(on_press=lambda x: self.graph(script, switch_quarter(selector), False))
+            self.get_data_for_month(selector, graph_button, data_out)
         else:
-            script = MovieScript(switch_quarter(1), True)
-            script.find_data_from_month(selector)
-            data_out.text = StartingPage.parse_report(script.report)
-            data_out.size_hint_min = (900, 900)
-            graph_button.bind(on_press=lambda x: self.graph(script, switch_month(selector), True))
+            self.get_data_for_season(selector, graph_button, data_out)
 
         data_out.do_scroll_x = False
         data_out.center_x

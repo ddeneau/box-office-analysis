@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="28c4dad7-df2a-4379-853e-86441a634901" name="Default Changelist" comment="Mostly functional GUI, except for some major issues with the graph option.">
-      <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.name" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/Practice.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/BoxOfficeProject.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+    <list default="true" id="28c4dad7-df2a-4379-853e-86441a634901" name="Default Changelist" comment="Added an option to view a graph of the complete timeline.">
+      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/Danny.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dictionaries/Danny.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GUI.py" beforeDir="false" afterPath="$PROJECT_DIR$/GUI.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MovieScript.py" beforeDir="false" afterPath="$PROJECT_DIR$/MovieScript.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/moviedata.csv" beforeDir="false" afterPath="$PROJECT_DIR$/moviedata.csv" afterDir="false" />
     </list>
@@ -28,6 +27,7 @@
   <component name="Git.Settings">
     <option name="PREVIOUS_COMMIT_AUTHORS">
       <list>
+        <option value="Danny &lt;ddeneau@terpmail.umd.edu&gt;" />
         <option value="ddeneau" />
         <option value="Daniel Deneau" />
       </list>
@@ -44,6 +44,7 @@
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/New Scratch File" value="Python" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="run.code.analysis.last.selected.profile" value="aDefault" />
     <property name="settings.editor.selected.configurable" value="settings.github" />
@@ -68,7 +69,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.BoxOfficeTimeline">
+  <component name="RunManager" selected="Python.Saver">
     <configuration name="BoxOfficeTimeline" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="BoxOfficeProject" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -111,7 +112,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="MovieScript" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="ML" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="BoxOfficeProject" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -123,7 +124,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/MovieScript.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/ML.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -176,11 +177,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.BoxOfficeTimeline" />
         <item itemvalue="Python.Saver" />
         <item itemvalue="Python.GUI" />
-        <item itemvalue="Python.MovieScript" />
         <item itemvalue="Python.Scores" />
+        <item itemvalue="Python.ML" />
+        <item itemvalue="Python.BoxOfficeTimeline" />
       </list>
     </recent_temporary>
   </component>
@@ -251,7 +252,14 @@
       <option name="project" value="LOCAL" />
       <updated>1581486695585</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Added an option to view a graph of the complete timeline.">
+      <created>1595645434236</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1595645434236</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -281,7 +289,8 @@
     <MESSAGE value="Scraped together very rough functionality for the GUI." />
     <MESSAGE value="Fixed seasonal and quarterly report functionality on GUI." />
     <MESSAGE value="Mostly functional GUI, except for some major issues with the graph option." />
-    <option name="LAST_COMMIT_MESSAGE" value="Mostly functional GUI, except for some major issues with the graph option." />
+    <MESSAGE value="Added an option to view a graph of the complete timeline." />
+    <option name="LAST_COMMIT_MESSAGE" value="Added an option to view a graph of the complete timeline." />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
@@ -290,9 +299,19 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/BoxOfficeTimeline.py</url>
-          <line>95</line>
-          <option name="timeStamp" value="116" />
+          <url>file://$PROJECT_DIR$/ML.py</url>
+          <line>24</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/GUI.py</url>
+          <line>102</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/MovieScript.py</url>
+          <line>282</line>
+          <option name="timeStamp" value="5" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>

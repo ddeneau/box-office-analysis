@@ -32,8 +32,9 @@ SPRING = "https://www.boxofficemojo.com/season/spring/?grossesOption=totalGrosse
 WINTER = "https://www.boxofficemojo.com/season/winter/?grossesOption=totalGrosses"
 FALL = "https://www.boxofficemojo.com/season/fall/?grossesOption=totalGrosses"
 MONTHLY = "https://www.boxofficemojo.com/month/february/?grossesOption=calendarGrosses"
-MONTHS = ("january", "february", "march", "april", "may", "june", "july", "august", "september", "october", "november",
-          "december")
+
+MONTHS = ("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November",
+          "December")
 SEASONS = (FIRST_QUARTER, SECOND_QUARTER, THIRD_QUARTER, FOURTH_QUARTER, WINTER, SPRING, SUMMER, FALL)
 
 # Top foreign films by country, weekly.
@@ -152,7 +153,7 @@ class Driver:
         url_back = "/?grossesOption=calendarGrosses"
 
         for month in MONTHS:
-            months.insert(index, url_front + month + url_back)
+            months.insert(index, url_front + month.lower() + url_back)
             index += 1
 
         return months

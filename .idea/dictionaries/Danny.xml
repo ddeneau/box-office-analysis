@@ -9,6 +9,7 @@
       <w>midright</w>
       <w>movedown</w>
       <w>moveup</w>
+      <w>perceptron</w>
       <w>pygame</w>
     </words>
   </dictionary>
