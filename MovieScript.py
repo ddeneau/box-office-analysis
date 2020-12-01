@@ -2,12 +2,11 @@
 # display data about film box-office performance.
 #
 # Author: ddeneau
-# Thanks to PyGame : https://www.pygame.org/contribute.html
 # Thanks to Beautiful Soup : https://www.crummy.com/software/BeautifulSoup/bs4/doc/
 
 # todo:
 # Fix graphing all quarters together
-# Add GUI
+# Improve GUI
 # Get more data!
 
 
@@ -86,6 +85,42 @@ def switch_color(color):
         6: 'magenta',
     }
     return switcher.get(color, 'yellow')
+
+
+# Returns text in format: Start Month, Stop Month, Season
+# Based off of input link.
+def get_time_frame_info(quarter):
+    start = ""
+    stop = ""
+    season = ""
+
+    if quarter is WINTER or SPRING or SUMMER or FALL:
+        if quarter is WINTER:
+            season = "Winter"
+        elif quarter is SPRING:
+            season = "Spring"
+        elif quarter is SUMMER:
+            season = "Summer"
+        elif quarter is FALL:
+            season = "Fall"
+        elif quarter is FIRST_QUARTER:
+            start = "January"
+            stop = "March"
+            season = "Q1"
+        elif quarter is SECOND_QUARTER:
+            start = "April"
+            stop = "June"
+            season = "Q2"
+        elif quarter is THIRD_QUARTER:
+            start = "July"
+            stop = "September"
+            season = "Q3"
+        else:
+            start = "October"
+            stop = "December"
+            season = "Q4"
+
+        return start, stop, season
 
 
 # Class for handling input. Initiates main script.
@@ -232,36 +267,10 @@ class MovieScript:
 
     # Compiles a report
     def print_report_by_season(self, quarter):
-        start = "."
-        stop = "."
-        season = "."
-
-        # Heading information sorting.
-        if quarter is WINTER or SPRING or SUMMER or FALL:
-            if quarter is WINTER:
-                season = "Winter"
-            elif quarter is SPRING:
-                season = "Spring"
-            elif quarter is SUMMER:
-                season = "Summer"
-            elif quarter is FALL:
-                season = "Fall"
-            elif quarter is FIRST_QUARTER:
-                start = "January"
-                stop = "March"
-                season = "Q1"
-            elif quarter is SECOND_QUARTER:
-                start = "April"
-                stop = "June"
-                season = "Q2"
-            elif quarter is THIRD_QUARTER:
-                start = "July"
-                stop = "September"
-                season = "Q3"
-            else:
-                start = "October"
-                stop = "December"
-                season = "Q4"
+        time_info = get_time_frame_info(quarter)
+        start = time_info[0]
+        stop = time_info[1]
+        season = time_info[2]
 
         print("From " + start + " to " + stop)
         print("Title ------- Gross: ")
@@ -322,9 +331,6 @@ class MovieScript:
 
 
 # Handles visualization of data.
-# todo:
-# Implement GUI. For now its just console based. But pygame is set up to run after the main program.
-# Need to make an API for the UserInput or Driver class to add features to a pygame session.
 class Graphics:
 
     def __init__(self):
@@ -353,8 +359,11 @@ class Graphics:
     # Creates and displays a scatter plot .
     @staticmethod
     def graph_data(data, time_frame, monthly):
-        title = "Highest Grossing film per year in " + time_frame if monthly else "Highest Grossing film per year " \
-                                                                                  "during:" + time_frame
+        time_frame = get_time_frame_info(time_frame)[2]
+
+        title = "Highest Grossing film per year in " + time_frame if monthly \
+            else "Highest Grossing film per year " \
+                 "during:" + time_frame
 
         fig, ax = plt.subplots()
 

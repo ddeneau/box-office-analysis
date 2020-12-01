@@ -93,12 +93,16 @@ class StartingPage(GridLayout):
         output.size_hint_min = (1000, 900)
         button.bind(on_press=lambda x: self.graph(script, switch_quarter(selector), False))
 
+        return script
+
     def get_data_for_season(self, selector, button, output):
-        script = MovieScript(switch_quarter(1), True)
+        script = MovieScript(switch_quarter(selector), True)
         script.find_data_from_month(selector)
         output.text = StartingPage.parse_report(script.report)
         output.size_hint_min = (900, 900)
         button.bind(on_press=lambda x: self.graph(script, switch_month(selector), True))
+
+        return script
 
     def start_script(self, time_type, selector):
         data_out = ScrollableLabel()
@@ -109,9 +113,9 @@ class StartingPage(GridLayout):
         self.clear_widgets()
 
         if time_type:
-            self.get_data_for_month(selector, graph_button, data_out)
+            script = self.get_data_for_month(selector, graph_button, data_out)
         else:
-            self.get_data_for_season(selector, graph_button, data_out)
+            script = self.get_data_for_season(selector, graph_button, data_out)
 
         data_out.do_scroll_x = False
         data_out.center_x
